@@ -48,8 +48,7 @@ def test_callouts(base_url, selenium):
 @pytest.mark.maintenance_mode
 def test_header_displays(base_url, selenium):
     page = HomePage(selenium, base_url).open()
-    assert page.Header.is_displayed
-    assert page.Header.is_menu_displayed
+    assert page.header.is_displayed
 
 
 @pytest.mark.smoke
@@ -78,6 +77,7 @@ def test_header_signin(base_url, selenium):
 @pytest.mark.maintenance_mode
 def test_header_no_signin(base_url, selenium):
     page = HomePage(selenium, base_url).open()
+    assert page.is_maintenance_mode_banner_displayed
     assert not page.header.is_signin_displayed
 
 
@@ -88,7 +88,7 @@ def test_header_no_signin(base_url, selenium):
 @pytest.mark.maintenance_mode
 def test_footer_displays(base_url, selenium):
     page = HomePage(selenium, base_url).open()
-    assert page.Footer.is_displayed
-    assert page.Footer.is_privacy_displayed
-    assert page.Footer.is_license_displayed
-    assert page.Footer.is_select_language_displayed
+    assert page.footer.is_displayed
+    assert page.footer.is_privacy_displayed
+    assert page.footer.is_license_displayed
+    assert page.footer.is_select_language_displayed

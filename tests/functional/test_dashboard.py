@@ -37,6 +37,13 @@ def test_dashboard(base_url, selenium):
     assert first_row_id is not new_first_row_id
 
 
+@pytest.mark.maintenance_mode
+def test_dashboard_in_mm(base_url, selenium):
+    page = DashboardPage(selenium, base_url).open()
+    assert page.is_maintenance_mode_banner_displayed
+    assert not page.header.is_signin_displayed
+
+
 @pytest.mark.smoke
 @pytest.mark.login
 @pytest.mark.nondestructive

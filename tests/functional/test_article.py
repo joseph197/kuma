@@ -11,9 +11,9 @@ ARTICLE_TITLE_SUFIX = " | MDN"
 @pytest.mark.maintenance_mode
 def test_title(base_url, selenium):
     page = ArticlePage(selenium, base_url).open()
-    assert (ARTICLE_NAME + ARTICLE_TITLE_SUFIX) == selenium.title, 'page title does not match expected'
-    assert page.article_title_text == ARTICLE_NAME, 'article title is not expected'
-    assert page.article_title_text in selenium.title, 'article title not in page title'
+    assert (ARTICLE_NAME + ARTICLE_TITLE_SUFIX) == selenium.title
+    assert page.article_title_text == ARTICLE_NAME
+    assert page.article_title_text in selenium.title
 
 
 # layout
@@ -47,6 +47,8 @@ def test_page_buttons_displayed_in_mm(base_url, selenium):
     assert page.is_language_menu_displayed
     assert not page.is_edit_button_displayed
     assert not page.header.is_signin_displayed
+    assert not page.is_add_translation_link_available
+    assert page.is_maintenance_mode_banner_displayed
     assert page.is_advanced_menu_displayed
 
 
@@ -56,8 +58,7 @@ def test_page_buttons_displayed_in_mm(base_url, selenium):
 @pytest.mark.maintenance_mode
 def test_header_displays(base_url, selenium):
     page = ArticlePage(selenium, base_url).open()
-    assert page.Header.is_displayed
-    assert page.Header.is_menu_displayed
+    assert page.header.is_displayed
 
 
 @pytest.mark.smoke
@@ -99,7 +100,7 @@ def test_header_feedback_submenu(base_url, selenium):
 @pytest.mark.maintenance_mode
 def test_footer_displays(base_url, selenium):
     page = ArticlePage(selenium, base_url).open()
-    assert page.Footer.is_displayed
-    assert page.Footer.is_privacy_displayed
-    assert page.Footer.is_license_displayed
-    assert page.Footer.is_select_language_displayed
+    assert page.footer.is_displayed
+    assert page.footer.is_privacy_displayed
+    assert page.footer.is_license_displayed
+    assert page.footer.is_select_language_displayed
